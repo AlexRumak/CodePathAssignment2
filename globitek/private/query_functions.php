@@ -50,7 +50,7 @@
     } else if (!has_length($state['name'], array('min' => 2, 'max' => 255))){
       $errors[] = "Name of state must be between 2 and 255 characters";
     } else if (!is_valid_spaced_name($state['name'])){
-      $errors[] = "Name of state must be alphabetic"
+      $errors[] = "Name of state must be alphabetic";
     }
 
     if (is_blank($state['code'])){
@@ -427,27 +427,34 @@
       $errors[] = "First name cannot be blank.";
     } elseif (!has_length($user['first_name'], array('min' => 2, 'max' => 255))) {
       $errors[] = "First name must be between 2 and 255 characters.";
+    } elseif (!has_valid_name_format($user['first_name'])){
+      $errors[] = "First name must be capitalized and alphabetic";
     }
 
     if (is_blank($user['last_name'])) {
       $errors[] = "Last name cannot be blank.";
     } elseif (!has_length($user['last_name'], array('min' => 2, 'max' => 255))) {
       $errors[] = "Last name must be between 2 and 255 characters.";
-    }
-
-    if (is_blank($user['email'])) {
-      $errors[] = "Email cannot be blank.";
-    } elseif (!has_valid_email_format($user['email'])) {
-      $errors[] = "Email must be a valid format.";
-    } elseif (!has_valid_email_characters($user['username'])){
-      $errors[] = "Email can only contain alphanumeric characters, spaces, and the following characters: @._";
+    } elseif (!has_valid_name_format($user['last_name'])){
+      $errors[] = "Last name must be capitalized and alphabetic";
     }
 
     if (is_blank($user['username'])) {
       $errors[] = "Username cannot be blank.";
     } elseif (!has_length($user['username'], array('max' => 255))) {
       $errors[] = "Username must be less than 255 characters.";
+    } elseif (!has_valid_username_characters($user['username'])){
+      $errors[] = "Username can only contain characters a-z, A-Z, 0-9 and the character -";
     }
+
+    if (is_blank($user['email'])) {
+      $errors[] = "Email cannot be blank.";
+    } elseif (!has_valid_email_format($user['email'])) {
+      $errors[] = "Email must be a valid format.";
+    } elseif (!has_valid_email_characters($user['email'])){
+      $errors[] = "Email can only contain alphanumeric characters, spaces, and the following characters: @._";
+    }
+
     return $errors;
   }
 
@@ -469,7 +476,7 @@
     $sql .= "'" . $user['last_name'] . "',";
     $sql .= "'" . $user['email'] . "',";
     $sql .= "'" . $user['username'] . "',";
-    $sql .= "'" . $created_at . "',";
+    $sql .= "'" . $created_at . "'";
     $sql .= ");";
     // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
