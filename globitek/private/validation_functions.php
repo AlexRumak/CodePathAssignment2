@@ -89,6 +89,7 @@
     return false;
   }
 
+  //My Custom Validation
   function is_valid_state_code($value){
     if(preg_match("/[^A-Z]/", $value)){
       return false;
@@ -129,7 +130,7 @@
   }
 
   //My Custom Validation
-  function is_valid_territory_name($value) {
+  function is_valid_spaced_name($value) {
     if(preg_match("/[^a-zA-Z ]/", $value)){
       return false;
     }

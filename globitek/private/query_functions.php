@@ -47,9 +47,10 @@
   function validate_state($state, $errors=array()) {
     if (is_blank($state['name'])) {
       $errors[] = "Name of state cannot be blank";
-    }
-    else if (!has_length($state['name'], array('min' => 2, 'max' => 255))){
+    } else if (!has_length($state['name'], array('min' => 2, 'max' => 255))){
       $errors[] = "Name of state must be between 2 and 255 characters";
+    } else if (!is_valid_spaced_name($state['name'])){
+      $errors[] = "Name of state must be alphabetic"
     }
 
     if (is_blank($state['code'])){
@@ -60,6 +61,10 @@
 
     if (is_blank($state['country_id'])){
       $errors[] = "Country ID cannot be blank";
+    } else if (!is_digits($state['country_id'])){
+      $errors[] = "Country ID must be in digits";
+    } else if (!has_length($state['country_id'], array('min' => 1, 'max' => 11))){
+      $errors[] = "Country ID must be between 1 and 11 digits";
     }
 
     return $errors;
@@ -165,7 +170,7 @@
     else if(!has_length($territory['name'], array('min' => 2, 'max' => 255))){
       $errors[] = "Territory name must be between 2 and 255 characters";
     }
-    else if(!is_valid_territory_name($territory['name'])){
+    else if(!is_valid_spaced_name($territory['name'])){
       $errors[] = "Territory name must only contain alphabetic characters";
     }
 
