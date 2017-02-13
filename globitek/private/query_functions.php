@@ -45,7 +45,21 @@
   }
 
   function validate_state($state, $errors=array()) {
-    // TODO add validations
+    // TODO more validations
+    if (is_blank($state['name'])) {
+      $errors[] = "Name of state cannot be blank";
+    }
+    else if (!has_length($state['name'], array('min' => 2, 'max' => 255))){
+      $errors[] = "Name of state must be between 2 and 255 characters";
+    }
+
+    if (is_blank($state['code'])){
+      $errors[] = "State code cannot be blank";
+    }
+
+    if (is_blank($state['country_id'])){
+      $errors[] = "Country ID cannot be blank";
+    }
 
     return $errors;
   }
@@ -144,6 +158,7 @@
 
   function validate_territory($territory, $errors=array()) {
     // TODO add validations
+
 
     return $errors;
   }
