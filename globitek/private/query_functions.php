@@ -285,7 +285,7 @@
       $errors[] = "First name cannot be blank.";
     } elseif (!has_length($salesperson['first_name'], array('min' => 2, 'max' => 255))) {
       $errors[] = "First name must be between 2 and 255 characters.";
-    } elseif (!has_valid_name_format($salesperson['first_name'])){
+    } elseif (!has_valid_name_format($salesperson['first_name'])) {
       $errors[] = "First name cannot contain non-alphabetic characters";
     }
 

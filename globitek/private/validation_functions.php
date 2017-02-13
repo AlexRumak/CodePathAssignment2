@@ -19,8 +19,16 @@
     }
   }
 
+  //My Custom Validation : NOT USED. Returns true if format matches: 555-555-5555
+  function has_valid_phone_format($value){
+    if(preg_match("/\d{3}-\d{3}-\d{4}/")){
+      return true;
+    }
+    return false;
+  }
+
   //My Custom Validation
-  function valid_name_format($value){
+  function has_valid_name_format($value){
     if(!has_valid_name_characters($value)){
       return false;
     } else if(!has_proper_capitalization($value)){
@@ -67,7 +75,7 @@
 
   //My Custom Validation
   function ends_with_digits($value){
-    if(preg_match("/\d+$/"), $value){
+    if(preg_match("/\d+$/", $value)){
       return true;
     }
     return false;
