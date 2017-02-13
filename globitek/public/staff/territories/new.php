@@ -12,9 +12,9 @@ $territory = array(
 if(is_post_request()) {
 
   // Confirm that values are present before accessing them.
-  if(isset($_POST['name'])) { $territory['name'] = $_POST['name']; }
-  if(isset($_POST['position'])) { $territory['position'] = $_POST['position']; }
-  if(isset($_POST['state_id'])) { $territory['state_id'] = $_POST['state_id']; }
+  if(isset($_POST['name'])) { $territory['name'] = test_input($_POST['name']); }
+  if(isset($_POST['position'])) { $territory['position'] = test_input($_POST['position']); }
+  if(isset($_POST['state_id'])) { $territory['state_id'] = test_input($_POST['state_id']); }
 
   $result = insert_territory($territory);
   if($result === true) {
@@ -25,7 +25,7 @@ if(is_post_request()) {
   }
 } else {
   // If it is a GET request
-  $territory['state_id'] = $_GET['state_id'];
+  $territory['state_id'] = test_input($_GET['state_id']);
 }
 ?>
 <?php $page_title = 'Staff: New Territory'; ?>

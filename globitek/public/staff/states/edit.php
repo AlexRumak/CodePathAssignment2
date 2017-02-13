@@ -4,7 +4,7 @@ require_once('../../../private/initialize.php');
 if(!isset($_GET['id'])) {
   redirect_to('index.php');
 }
-$states_result = find_state_by_id($_GET['id']);
+$states_result = find_state_by_id(test_input($_GET['id']));
 // No loop, only one result
 $state = db_fetch_assoc($states_result);
 
@@ -13,9 +13,9 @@ $errors = array();
 if(is_post_request()) {
 
   // Confirm that values are present before accessing them.
-  if(isset($_POST['name'])) { $state['name'] = $_POST['name']; }
-  if(isset($_POST['code'])) { $state['code'] = $_POST['code']; }
-  if(isset($_POST['country_id'])) { $state['country_id'] = $_POST['country_id']; }
+  if(isset($_POST['name'])) { $state['name'] = test_input($_POST['name']); }
+  if(isset($_POST['code'])) { $state['code'] = test_input($_POST['code']); }
+  if(isset($_POST['country_id'])) { $state['country_id'] = test_input($_POST['country_id']); }
 
   $result = update_state($state);
   if($result === true) {

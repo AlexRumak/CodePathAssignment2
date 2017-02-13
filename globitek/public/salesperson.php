@@ -7,7 +7,7 @@
   }
 
   // Find salesperson using id in query string
-  $id = $_GET['id'];
+  $id = test_input($_GET['id']);
   $salespeople_result = find_salesperson_by_id($id);
 
   $row_count = db_num_rows($salespeople_result);

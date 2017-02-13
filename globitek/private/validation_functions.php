@@ -29,8 +29,26 @@
 
   // has_valid_email_format('test@test.com')
   function has_valid_email_format($value) {
-
+    if(!no_double_special_email_characters($value)){
+      return false;
+    }
     return strpos($value, '@') !== false;
+  }
+
+  //My Custom Validation
+  function no_double_special_email_characters($value){
+    if(preg_match("/\.\./", $value)) {
+      return false;
+    } else if (preg_match("/@.*@/", $value)) {
+      return false;
+    } else{
+      return true;
+    }
+  }
+
+  //My Custom validation
+  function valid_phone_format($value){
+
   }
 
   function has_valid_username_characters($value) {
@@ -54,7 +72,7 @@
     return true;
   }
 
-  //Custom validation function
+  //My Custom Validation
   function is_digits($value) {
     if(preg_match("/[^0-9]/", $value)){
       return false;
@@ -62,6 +80,7 @@
     return true;
   }
 
+  //My Custom Validation
   function is_valid_territory_name($value) {
     if(preg_match("/[^a-zA-Z ]/", $value)){
       return false;

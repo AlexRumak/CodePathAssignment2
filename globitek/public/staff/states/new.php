@@ -11,9 +11,9 @@ $state = array(
 if(is_post_request()) {
 
   // Confirm that values are present before accessing them.
-  if(isset($_POST['name'])) { $state['name'] = $_POST['name']; }
-  if(isset($_POST['code'])) { $state['code'] = $_POST['code']; }
-  if(isset($_POST['country_id'])) { $state['country_id'] = $_POST['country_id']; }
+  if(isset($_POST['name'])) { $state['name'] = test_input($_POST['name']); }
+  if(isset($_POST['code'])) { $state['code'] = test_input($_POST['code']); }
+  if(isset($_POST['country_id'])) { $state['country_id'] = test_input($_POST['country_id']); }
 
   $result = insert_state($state);
   if($result === true) {

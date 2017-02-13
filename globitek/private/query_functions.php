@@ -45,7 +45,6 @@
   }
 
   function validate_state($state, $errors=array()) {
-    // TODO more validations
     if (is_blank($state['name'])) {
       $errors[] = "Name of state cannot be blank";
     }
