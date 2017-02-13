@@ -19,17 +19,36 @@
     }
   }
 
+  //My Custom Validation
+  function valid_name_format($value){
+    if(!has_valid_name_characters($value)){
+      return false;
+    } else if(!has_proper_capitalization($value)){
+      return false;
+    }
+    return true;
+  }
+
   function has_valid_name_characters($value) {
-    //Custom
     if(preg_match("/[^A-Za-z]/", $value)){
       return false;
     }
     return true;
   }
 
+  //My Custom Validations
+  function has_proper_capitalization($value){
+    if(preg_match("/[A-Z][a-z]*/", $value)){
+      return true;
+    }
+    return false;
+  }
+
   // has_valid_email_format('test@test.com')
   function has_valid_email_format($value) {
     if(!no_double_special_email_characters($value)){
+      return false;
+    } else if (!valid_email_ending($value)){
       return false;
     }
     return strpos($value, '@') !== false;
@@ -46,10 +65,22 @@
     }
   }
 
-  //My Custom validation
-  function valid_phone_format($value){
-
+  //My Custom Validation
+  function ends_with_digits($value){
+    if(preg_match("/\d+$/"), $value){
+      return true;
+    }
+    return false;
   }
+
+  //My Custom Validation
+  function valid_email_ending($value){
+    if(preg_match("/[A-Za-z0-9-]+$/", $value)){
+      return true;
+    }
+    return false;
+  }
+
 
   function has_valid_username_characters($value) {
     if (preg_match("/[^a-zA-Z0-9_]/", $value)){
