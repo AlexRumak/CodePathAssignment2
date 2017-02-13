@@ -3,10 +3,9 @@ require_once('../../../private/initialize.php');
 
 // Set default values for all variables the page needs.
 $errors = array();
-$state_id = $_GET['state_id'];
 $territory = array(
   'name' => '',
-  'state_id' => $state_id,
+  'state_id' => '',
   'position' => ''
 );
 
@@ -15,6 +14,7 @@ if(is_post_request()) {
   // Confirm that values are present before accessing them.
   if(isset($_POST['name'])) { $territory['name'] = $_POST['name']; }
   if(isset($_POST['position'])) { $territory['position'] = $_POST['position']; }
+  if(isset($_POST['state_id'])) { $territory['state_id'] = $_POST['state_id']; }
 
   $result = insert_territory($territory);
   if($result === true) {
@@ -23,15 +23,20 @@ if(is_post_request()) {
   } else {
     $errors = $result;
   }
+} else {
+  // If it is a GET request
+  $territory['state_id'] = $_GET['state_id'];
 }
 ?>
 <?php $page_title = 'Staff: New Territory'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <div id="main-content">
-  <a href="../states/show?id=<?php echo urlencode($state_id)?>">Back to State Details</a><br />
+  <a href="../states/show.php?id=<?php echo urlencode($territory['state_id'])?>">Back to State Details</a><br />
 
   <h1>New Territory</h1>
+
+  <?php echo display_errors($errors); ?>
 
   <form action="new.php" method="post">
     Territory Name:<br />
@@ -40,6 +45,7 @@ if(is_post_request()) {
     Territory Position:<br />
     <input type="text" name="position" value="<?php echo $territory['position']; ?>" /><br />
     <br />
+    <input type="hidden" name="state_id" value="<?php echo $territory['state_id']; ?>" />
     <input type="submit" name="submit" value="Create"  />
   </form>
 

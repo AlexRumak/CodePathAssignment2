@@ -54,4 +54,19 @@
     return true;
   }
 
+  //Custom validation function
+  function is_digits($value) {
+    if(preg_match("/[^0-9]/", $value)){
+      return false;
+    }
+    return true;
+  }
+
+  function is_valid_territory_name($value) {
+    if(preg_match("/[^a-zA-Z ]/", $value)){
+      return false;
+    }
+    return true;
+  }
+
 ?>
