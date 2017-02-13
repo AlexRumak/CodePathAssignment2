@@ -75,7 +75,7 @@
 
   //My Custom Validation
   function valid_email_ending($value){
-    if(preg_match("/[A-Za-z0-9-]+$/", $value)){
+    if(preg_match("/[A-Za-z0-9]+$/", $value)){
       return true;
     }
     return false;
