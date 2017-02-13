@@ -89,6 +89,15 @@
     return false;
   }
 
+  function is_valid_state_code($value){
+    if(preg_match("/[^A-Z]/", $value)){
+      return false;
+    }
+    if(strlen($value) != 2){
+      return false;
+    }
+    return true;
+  }
 
   function has_valid_username_characters($value) {
     if (preg_match("/[^a-zA-Z0-9_]/", $value)){

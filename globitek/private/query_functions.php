@@ -54,6 +54,8 @@
 
     if (is_blank($state['code'])){
       $errors[] = "State code cannot be blank";
+    } else if (!is_valid_state_code($state['code'])){
+      $errors[] = "State code must be two characters long and capitalized";
     }
 
     if (is_blank($state['country_id'])){
